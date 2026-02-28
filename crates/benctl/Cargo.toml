@@ -1,0 +1,24 @@
+[package]
+name = "benctl"
+version = "0.1.0"
+edition = "2024"
+description = "Ben command-line control client and command signer"
+license = "Apache-2.0-or-later"
+
+[lib]
+name = "benctl"
+path = "src/lib.rs"
+doctest = false
+bench = false
+
+[[bin]]
+name = "benctl"
+path = "src/main.rs"
+
+
+[dependencies]
+ben_contracts = { path = "../ben_contracts" }
+clap = { version = "4.5.53", features = ["derive"] }
+anyhow = "1.0.100"
+serde = { version = "1.0.228", features = ["derive"], optional = true }
+camino = "1.2.2"

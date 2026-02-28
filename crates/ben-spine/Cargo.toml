@@ -1,0 +1,16 @@
+[package]
+name = "ben-spine"
+version = "0.1.0"
+edition = "2024"
+description = "Central ingestion and control service for Ben"
+
+[lib]
+path = "src/lib.rs"
+doctest = false
+bench = false
+
+[[bin]]
+name = "ben_spine"
+path = "src/main.rs"
+
+[dependencies]

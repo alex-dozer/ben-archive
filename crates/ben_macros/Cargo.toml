@@ -1,0 +1,24 @@
+[package]
+name = "ben_macros"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0.101"
+quote = "1"
+syn = { version = "2.0.107", features = ["full"] }
+bitspec_engine = { path = "../bitspec_engine" }
+ben_wire = { path = "../ben_wire" }
+blot_engine = { path = "../blot_engine" }
+ben_contracts = { path = "../ben_contracts" }
+darling = "0.20"
+trybuild = "1"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1"
+heck = "0.5"
+sha2 = "0.10.9"
+anyhow = "1.0.100"
+linkme = "0.3.35"

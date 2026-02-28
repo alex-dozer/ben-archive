@@ -1,0 +1,26 @@
+[package]
+name = "sandbox"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1"
+tokio = { version = "1", features = ["full"] }
+# your internal crates
+ben_macros = { path = "../ben_macros" }
+ben_contracts = { path = "../ben_contracts" }
+ben_wire = { path = "../ben_wire" }
+
+
+[lib]
+name = "ben_sandbox"
+path = "src/lib.rs"
+
+[[bin]]
+name = "a_team"
+path = "src/bin/a_team.rs"
+
+[[bin]]
+name = "b_team"
+path = "src/bin/b_team.rs"

@@ -1,0 +1,19 @@
+[package]
+name = "ben-routines"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[lib]
+lib = "./lib.rs"
+
+[dependencies]
+ben_macros = { path = "../ben_macros" }
+ben_contracts = { path = "../ben_contracts" }
+ben_wire = { path = "../ben_wire" }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+sha2 = "0.10"
+anyhow = "1.0.100"
+reqwest = "0.12.24"
+url = "2.5.7"

@@ -1,0 +1,97 @@
+version: "3.9"
+
+services:
+  nats:
+    image: nats:2.12.1
+    command: [ "-js", "-sd", "/data", "-user", "${NATS_USER}", "-pass", "${NATS_PASSWORD}" ]
+    ports: [ "4222:4222" ]
+    volumes:
+      - ./nats-data:/data
+
+    healthcheck:
+      test: [ "CMD", "nats-server", "--version" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:RELEASE.2025-07-08T00-00-00Z 
+    command: [ "server", "/data", "--console-address", ":9001" ]
+    ports:
+      - "9000:9000" # S3 API
+      - "9001:9001" # Console
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./minio-data:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.10
+    ports: [ "8123:8123", "9000:9000" ]
+    volumes:
+      - ./clickhouse-data:/var/lib/clickhouse
+      - ./clickhouse/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD", "bash", "-lc", "curl -s 'http://localhost:8123/?query=SELECT%201' | grep -q 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  bee:
+    build:
+      context: ../ben/crates/bee
+      dockerfile: Dockerfile
+    depends_on:
+      nats:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    environment:
+      NATS_URL: nats://nats:4222
+      MINIO_ENDPOINT: http://minio:9000
+      CLICKHOUSE_URL: http://clickhouse:8123
+      BEE_SOCK: /run/bee/bee.sock
+    volumes:
+      - bee-run:/run/bee 
+      - ./bee-data:/var/lib/bee 
+    healthcheck:
+      test: [ "CMD", "bash", "-lc", "test -S /run/bee/bee.sock" ]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  spine:
+    build:
+      context: ../ben/crates/spine
+      dockerfile: Dockerfile
+    depends_on:
+      bee:
+        condition: service_healthy
+    environment:
+      CLICKHOUSE_URL: http://clickhouse:8123
+      NATS_URL: nats://nats:4222
+      BEE_SOCK: /run/bee/bee.sock
+    volumes:
+      - bee-run:/run/bee 
+      - ./spine-data:/var/lib/ben
+    restart: unless-stopped
+
+volumes:
+  nats-data:
+  bee-run:
+  minio-data:
+  clickhouse-data:
+  bee-data:
+  spine-data:

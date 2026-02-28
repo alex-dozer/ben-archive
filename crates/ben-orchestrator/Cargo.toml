@@ -1,0 +1,20 @@
+[package]
+name = "ben-orchestrator"
+version = "0.1.0"
+edition = "2024"
+description = "Fleet orchestration and config rollout daemon for Ben"
+license = "Apache-2.0-or-later"
+
+[lib]
+path = "src/lib.rs"
+doctest = false
+bench = false
+
+[[bin]]
+name = "ben_orchestrator"
+path = "src/main.rs"
+
+[dependencies]
+
+# Internal crates
+ben_policy = { path = "../ben_policy" }

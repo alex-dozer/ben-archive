@@ -1,0 +1,13 @@
+/Users/alex/dozer-archive/ben/target/debug/deps/ben_wire-7d303eacb1d1f38c.d: crates/ben_wire/src/lib.rs crates/ben_wire/src/envelope.rs crates/ben_wire/src/error.rs crates/ben_wire/src/rowbinary.rs crates/ben_wire/src/rowpack.rs crates/ben_wire/src/schema.rs crates/ben_wire/src/serde_bridge.rs crates/ben_wire/src/slot.rs crates/ben_wire/src/view.rs
+
+/Users/alex/dozer-archive/ben/target/debug/deps/libben_wire-7d303eacb1d1f38c.rmeta: crates/ben_wire/src/lib.rs crates/ben_wire/src/envelope.rs crates/ben_wire/src/error.rs crates/ben_wire/src/rowbinary.rs crates/ben_wire/src/rowpack.rs crates/ben_wire/src/schema.rs crates/ben_wire/src/serde_bridge.rs crates/ben_wire/src/slot.rs crates/ben_wire/src/view.rs
+
+crates/ben_wire/src/lib.rs:
+crates/ben_wire/src/envelope.rs:
+crates/ben_wire/src/error.rs:
+crates/ben_wire/src/rowbinary.rs:
+crates/ben_wire/src/rowpack.rs:
+crates/ben_wire/src/schema.rs:
+crates/ben_wire/src/serde_bridge.rs:
+crates/ben_wire/src/slot.rs:
+crates/ben_wire/src/view.rs:
