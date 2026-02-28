@@ -1,5 +1,7 @@
 # This is just an archive
 
+>### NOTE: there are a lot of empty crates here. I generally do this in development so I can have structure. It's bloated, its just how i roll
+
 I decided to fully stop working on Ben as a system. However, despite sunsetting this ambition it did really help shape my thinking for future systems in terms of compile time guarantees. It shaped the route I wanted to go.;
 
 This is an archive of the work done on ben. macros mostly. I haven't touched it in a long time, but may pull code pieces from it at times. It compiles and I'm fairly certain that any macro test does pass.
