@@ -8,6 +8,8 @@ This is an archive of the work done on ben. macros mostly. I haven't touched it 
 
 I haven't touched this in months, and all of it is a draft. Just getting parts to work before polish is applied.
 
+some macro tests are real commented since i tried to use them to develop substack tutorials.
+
 ## ben - The Observability without lock-in
 
 ---
