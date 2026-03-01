@@ -1,12 +1,14 @@
 # This is just an archive
 
->### NOTE: there are a lot of empty crates here. I generally do this in development so I can have structure. It's bloated, its just how i roll
+>NOTE: there are a lot of empty crates here. I generally do this in development so I can have structure. It's bloated, its just how i roll. If tests are failing I ended up pushing a breaking change, which I sometimes do to just have 90% of the idea finished but am just too tired to do the 10%
 
 I decided to fully stop working on Ben as a system. However, despite sunsetting this ambition it did really help shape my thinking for future systems in terms of compile time guarantees. It shaped the route I wanted to go.;
 
 This is an archive of the work done on ben. macros mostly. I haven't touched it in a long time, but may pull code pieces from it at times. It compiles and I'm fairly certain that any macro test does pass.
 
 I haven't touched this in months, and all of it is a draft. Just getting parts to work before polish is applied.
+
+some macro tests are real commented since i tried to use them to develop substack tutorials.
 
 ## ben - The Observability without lock-in
 
