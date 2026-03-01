@@ -1,6 +1,6 @@
 # This is just an archive
 
->NOTE: there are a lot of empty crates here. I generally do this in development so I can have structure. It's bloated, its just how i roll. If tests are failing I ended up pushing a breaking change, which I sometimes do to just have 90% of the idea finished but am just too tired to do the 10%
+>NOTE: there are a lot of empty crates here. I generally do this in development so I can have structure. It's bloated, its just how i roll. If tests are failing I ended up pushing a breaking change, which I sometimes do to just have 90% of the idea finished but am just too tired to do the 10%. I got bugged that ben schema didn't work so i fixed it and archived it again
 
 I decided to fully stop working on Ben as a system. However, despite sunsetting this ambition it did really help shape my thinking for future systems in terms of compile time guarantees. It shaped the route I wanted to go.;
 
