@@ -126,6 +126,7 @@ pub fn derive_ben_schema(input: DeriveInput) -> syn::Result<TokenStream2> {
             pub const __BEN_SCHEMA_VERSION: u32               = #version;
             pub const __BEN_SCHEMA_FINGERPRINT: &'static str  = #fingerprint_lit;
             pub const __BEN_SCHEMA_DDL: &'static str          = #ddl_lit;
+            pub const __BEN_SCHEMA_JSON: &'static str         = #json_lit;
             pub const __BEN_SCHEMA_EVT_HASH: [u8; 32]         = #evt_hash_tokens;
             pub const __BEN_SCHEMA_FIELD_COUNT: u16           = #field_count_u16;
         }
@@ -135,6 +136,7 @@ pub fn derive_ben_schema(input: DeriveInput) -> syn::Result<TokenStream2> {
             const __BEN_SCHEMA_VERSION: u32              = #version;
             const __BEN_SCHEMA_FINGERPRINT: &'static str = #fingerprint_lit;
             const __BEN_SCHEMA_DDL: &'static str         = #ddl_lit;
+            const __BEN_SCHEMA_JSON: &'static str        = #json_lit;
         }
 
         pub fn schema_manifest() -> ::ben_contracts::schema::SchemaManifest {
@@ -151,33 +153,33 @@ pub fn derive_ben_schema(input: DeriveInput) -> syn::Result<TokenStream2> {
             }
         }
 
-        // impl ::ben_wire::rowbinary::RowBinaryEncode for #ident {
-        //     fn encode_rowbinary(&self, out: &mut ::std::vec::Vec<u8>) -> ::ben_wire::rowbinary::RowBinaryResult {
-        //         #( #encode_stmts )*
-        //         Ok(())
-        //     }
-        // }
+        impl ::ben_wire::rowbinary::RowBinaryEncode for #ident {
+            fn encode_rowbinary(&self, out: &mut ::std::vec::Vec<u8>) -> ::ben_wire::rowbinary::RowBinaryResult {
+                #( #encode_stmts )*
+                Ok(())
+            }
+        }
 
-        // impl ::ben_wire::rowbinary::RowBinaryDecode for #ident {
-        //     const EVT_HASH: [u8; 32] = #evt_hash_tokens;
-        //     const FIELD_COUNT: u16 = #field_count_u16;
+        impl ::ben_wire::rowbinary::RowBinaryDecode for #ident {
+            const EVT_HASH: [u8; 32] = #evt_hash_tokens;
+            const FIELD_COUNT: u16 = #field_count_u16;
 
-        //     fn from_rowbinary(cur: &mut ::ben_wire::rowbinary::RowBinCursor<'_>) -> ::anyhow::Result<Self> {
-        //         #(#decode_stmts)*
-        //         Ok(Self {
-        //             #(#field_inits),*
-        //         })
-        //     }
-        // }
+            fn from_rowbinary(cur: &mut ::ben_wire::rowbinary::RowBinCursor<'_>) -> ::anyhow::Result<Self> {
+                #(#decode_stmts)*
+                Ok(Self {
+                    #(#field_inits),*
+                })
+            }
+        }
 
-        // impl ::ben_wire::rowbinary::EncodeQuic for #ident {
-        //     const EVT_HASH: [u8; 32] = #evt_hash_tokens;
-        //     const FIELD_COUNT: u16   = #field_count_u16;
-        // }
+        impl ::ben_wire::rowbinary::EncodeQuic for #ident {
+            const EVT_HASH: [u8; 32] = #evt_hash_tokens;
+            const FIELD_COUNT: u16   = #field_count_u16;
+        }
 
-        // impl ::ben_wire::rowbinary::DecodeQuic for #ident {
-        //     const EVT_HASH: [u8; 32] = #evt_hash_tokens;
-        //     const FIELD_COUNT: u16   = #field_count_u16;
-        // }
+        impl ::ben_wire::rowbinary::DecodeQuic for #ident {
+            const EVT_HASH: [u8; 32] = #evt_hash_tokens;
+            const FIELD_COUNT: u16   = #field_count_u16;
+        }
     })
 }
